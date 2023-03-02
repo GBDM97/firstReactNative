@@ -1,23 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { MainContext } from '../context/mainContext';
-import GetNameAttributes from '../services/getNameAttributes';
+import { store } from '../redux/store';
 import React from "react";
-
+import { person, personSlice } from '../redux/slices';
 
 export default function InsertName() {
 
-  const { name, changeName } = React.useContext(MainContext);
   const { currentPage, changePage } = React.useContext(MainContext);
 
-  function updateContextAttributes() {
-    GetNameAttributes("book-2");
+  const returnName = (state: person) => {
+    alert(state.name)
+    return state.name;
   }
 
   return (
     <View style={styles.container}>
-      <TextInput style={styles.txInput} onChangeText={changeName}/>
-      <Button title='Login' onPress={()=>{changePage(2); updateContextAttributes()}}/>
+      <TextInput style={styles.txInput} onChangeText={(n)=>{
+        store.dispatch(personSlice.actions.changeName(n))
+      }}/>
+      <Button title='Login' onPress={()=>{changePage(2)}}/>
+      <Text>{returnName(store.getState())}</Text>
       <StatusBar/>
     </View>
   );
