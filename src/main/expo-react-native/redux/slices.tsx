@@ -7,9 +7,16 @@ export type person = {
     imageName: string
 };
 
+export type IpersonSlice ={
+    reducer: {id: number,
+	name: string,
+    image: string,
+    imageName: string}
+}
+
 export const initialState:person = {
 	id: 0,
-	name: "",
+	name: "vazio",
     image: "",
     imageName: ""
 };
@@ -19,7 +26,7 @@ export const personSlice = createSlice({
 	initialState,
 	reducers: {
 		changeName: (state, action) => {
-			state.name = action.payload.name;
+			state.name = action.payload.nativeEvent.text;
 		},
         changeId: (state, action) => {
             state.id = action.payload.id;
@@ -32,6 +39,8 @@ export const personSlice = createSlice({
 		},
 	}
 });
+
+export const selectName = (state:person) => {console.log(state.name); return state.name};
 
 export const { changeName, changeId, changeImage, changeImageName } = personSlice.actions;
 
