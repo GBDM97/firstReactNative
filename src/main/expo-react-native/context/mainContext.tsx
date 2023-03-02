@@ -2,9 +2,9 @@ import React from "react";
 
 export interface IMainContext {
     name:String;
-    changeName?: (name:string) => void;
+    changeName: (name:string) => void;
     currentPage:Number;
-    changePage?: (number:number) => void;
+    changePage: (number:number) => void;
 
   }
   

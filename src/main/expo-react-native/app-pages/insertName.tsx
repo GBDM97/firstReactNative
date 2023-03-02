@@ -1,19 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { MainContext } from '../context/mainContext';
+import GetNameAttributes from '../services/getNameAttributes';
 import React from "react";
 
 
 export default function InsertName() {
 
   const { name, changeName } = React.useContext(MainContext);
+  const { currentPage, changePage } = React.useContext(MainContext);
 
-  const changePage = () => {}
+  function updateContextAttributes() {
+    GetNameAttributes("book-2");
+  }
 
   return (
     <View style={styles.container}>
       <TextInput style={styles.txInput} onChangeText={changeName}/>
-      <Button title='Login' onPress={changePage}/>
+      <Button title='Login' onPress={()=>{changePage(2); updateContextAttributes()}}/>
       <StatusBar/>
     </View>
   );
