@@ -16,7 +16,7 @@ export type IpersonSlice ={
 
 export const initialState:person = {
 	id: 0,
-	name: "vazio",
+	name: "",
     image: "",
     imageName: ""
 };
@@ -40,7 +40,7 @@ export const personSlice = createSlice({
 	}
 });
 
-export const selectName = (state:person) => {console.log(state.name); return state.name};
+export const selectName = (state:person) => {return state.name};
 
 export const { changeName, changeId, changeImage, changeImageName } = personSlice.actions;
 
