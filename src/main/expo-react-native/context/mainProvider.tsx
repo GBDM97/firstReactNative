@@ -5,10 +5,11 @@ interface Props {
   children: React.ReactNode;
 }
 
-export const GameProvider: React.FC<Props> = ({ children }) => {
+export const MainContextProvider: React.FC<Props> = ({ children }) => {
     const [currentPage, setPage] = React.useState(defaultState.currentPage);
     
     const changePage = (number: number) => {
+        console.log(number)
         setPage(number);
       };
 
