@@ -1,10 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
+import { CONTINENT_QUERY } from "../gql/Query"
+import { useQuery } from '@apollo/client';
 
-export default function InsertName() {
+const data = useQuery(CONTINENT_QUERY);
+
+export default function ListPage() {
   return (
     <View style={styles.container}>
-      <FlatList data={}/>
     </View>
   );
 }

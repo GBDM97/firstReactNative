@@ -1,6 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { personSlice } from './slices'
+import { IusersSlice, users, usersSlice } from './usersSlice'
+import {IimagesSlice, images, imagesSlice} from './imagesSlice'
+
+export type Store = {
+    usersReducer: users,
+    imagesReducer: images,
+}
 
 export const store = configureStore({
-  reducer: personSlice.reducer
+  reducer: {
+    usersReducer: usersSlice.reducer,
+    imagesReducer: imagesSlice.reducer,
+    }
 })

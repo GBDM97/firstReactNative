@@ -1,31 +1,32 @@
 import React from "react";
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, NativeSyntheticEvent, Pressable, StyleSheet, Text, TextInput, TextInputChangeEventData, View } from 'react-native';
 import { MainContext } from '../context/mainContext';
-import { store } from '../redux/store';
-import { person, personSlice } from '../redux/slices';
 import { useSelector, useDispatch } from "react-redux";
-import { changeName, selectName } from "../redux/slices";
-import getPersonAttributes from "../services/getPersonAttributes";
-import { useQuery } from "@apollo/client";
-import { NAME_QUERY } from "../gql/Query";
+import { changeSelectedUser, selectUsers } from "../redux/usersSlice";
+
 
 
 export default function InsertName() {
-  let data;
-  const query = () => { data = useQuery(NAME_QUERY); console.log(data)}
+
   const { currentPage, changePage } = React.useContext(MainContext);
-  const name = useSelector(selectName);
+  const [userExists, setExists] = React.useState("");
+  const usersState = useSelector(selectUsers).usersReducer;
   const dispatch = useDispatch();
 
+  const handleInsertUser = (n: string) => {
+    
+    if (n === usersState.users[0].name){dispatch(changeSelectedUser(usersState.users[0])); setExists('existing user'); return}else{setExists("")}
+    if (n === usersState.users[1].name){dispatch(changeSelectedUser(usersState.users[1])); setExists('existing user'); return}else{setExists("")}
+    if (n === usersState.users[2].name){dispatch(changeSelectedUser(usersState.users[2])); setExists('existing user'); return}else{setExists("")}
+  }
 
   return (
     <View style={styles.container}>
-      <TextInput style={styles.txInput} onChange={(n)=>{
-        dispatch(changeName(n))
-      }}/>
-      <Button title='Login' onPress={()=>{query()}}/>
-      <Text style={{color: 'white'}}>{data}</Text>
+      <Text style={{color: 'lime'}}>{userExists}</Text>
+      <TextInput style={styles.txInput} onChange={(n)=>{handleInsertUser(n.nativeEvent.text)}}/>
+      <Pressable style={styles.login} onPress={()=>userExists ? changePage(2):''}>Login</Pressable>
+      <Text style={{color: 'white'}}></Text>
       <StatusBar/>
     </View>
   );
@@ -49,4 +50,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     margin: 10
   },
+  login: {
+    backgroundColor: 'blue',
+    color: 'black',
+    padding: 10,
+    fontFamily: 'Trebuchet MS'
+  }
+
 });

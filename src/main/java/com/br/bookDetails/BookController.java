@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Controller
-// @CrossOrigin("http://localhost:19006/")
+@CrossOrigin("https://localhost:19006/")
 public class BookController {
     @QueryMapping
     public Book bookById(@Argument String id) {

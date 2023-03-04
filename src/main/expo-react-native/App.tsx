@@ -4,11 +4,16 @@ import InsertName from './app-pages/insertName';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { MainContext } from './context/mainContext';
+import React from 'react';
+import ListPage from './app-pages/listPage';
 
 export default function App() {
 
+  const { currentPage, changePage } = React.useContext(MainContext);
+
   const client = new ApolloClient({
-    uri: 'https://localhost:8080/graphql',
+    uri: 'https://countries.trevorblades.com/graphql',
     cache: new InMemoryCache()
   });
 
@@ -16,7 +21,9 @@ export default function App() {
     <Provider store={store}>
       <ApolloProvider client={client}>
         <View style={styles.container}>
-          <InsertName/>
+          {currentPage === 1 ? <InsertName/> : ""}
+          {currentPage === 2 ? <ListPage/> : ""} 
+
         </View>
       </ApolloProvider>
     </Provider>
