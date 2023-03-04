@@ -9,7 +9,6 @@ export const MainContextProvider: React.FC<Props> = ({ children }) => {
     const [currentPage, setPage] = React.useState(defaultState.currentPage);
     
     const changePage = (number: number) => {
-        console.log(number)
         setPage(number);
       };
 

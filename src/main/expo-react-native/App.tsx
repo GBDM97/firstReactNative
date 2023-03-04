@@ -5,7 +5,8 @@ import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { MainContextProvider } from './context/mainProvider';
-import MainScreen from './components/mainScreen';
+import InsertName from './app-pages/insertName';
+import ListPage from './app-pages/listPage';
 
 export default function App() {
 
@@ -19,7 +20,8 @@ export default function App() {
       <MainContextProvider>
         <ApolloProvider client={client}>
           <View style={styles.container}>
-            <MainScreen/>
+            <InsertName/>
+            <ListPage/>
           </View>
         </ApolloProvider>
       </MainContextProvider>

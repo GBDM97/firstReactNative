@@ -1,20 +1,5 @@
 import { gql } from "@apollo/client";
 
-export const REACTIO_QUERY = gql`
-query publications {
-  edges {
-    node {
-      id
-      authors
-      title
-      journal
-      year
-      doi
-    }
-  }
-}
-`;
-
 export const CONTINENT_QUERY = gql`
   query ContinentQuery {
     continents {
@@ -39,12 +24,12 @@ export const CONTINENT_QUERY = gql`
 // }
 // `;
 
-// export const COUNTRY_QUERY = gql`
-//   query Continent($code: ID!) {
-//     continent(code: $code) {
-//       countries {
-//         name
-//       }
-//     }
-//   }
-// `;
+export const COUNTRY_QUERY = gql`
+  query Continent($code: ID!) {
+    continent(code: $code) {
+      countries {
+        name
+      }
+    }
+  }
+`;

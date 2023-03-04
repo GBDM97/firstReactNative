@@ -5,27 +5,32 @@ export type users = {
 	users: [
 		{
 			name: string,
-			id: number,
-			availableImages: Array<number>
+			id: number
 		},
 		{
 			name: string,
-			id: number,
-			availableImages: Array<number>
+			id: number
 		},
 		{
 			name: string,
-			id: number,
-			availableImages: Array<number>
+			id: number
 		}
 	],
-	selectedUser: {}
+	selectedUser: {
+		name: string,
+		id: number,
+		availableImages: Array<number>
+	}
 };
 
 export type IusersSlice ={
     reducer: {
 		users: [],
-		selectedUser: {}
+		selectedUser: {
+			name: string,
+			id: number,
+			availableImages: Array<number>
+		}
 	}
 }
 
@@ -33,21 +38,22 @@ export const initialState:users = {
 	users: [
 		{
 			name: "Ghian",
-			id: 777,
-			availableImages: [11, 22, 33]
+			id: 777
 		},
 		{
 			name: "Sonival",
-			id: 888,
-			availableImages: [33, 44, 55]
+			id: 888
 		},
 		{
 			name: "Rapha",
-			id: 999,
-			availableImages: [66, 77, 88]
+			id: 999
 		}
 	],
-	selectedUser: {}
+	selectedUser: {
+		name: "",
+		id: 0,
+		availableImages: []
+	}
 };
 
 export const usersSlice = createSlice({

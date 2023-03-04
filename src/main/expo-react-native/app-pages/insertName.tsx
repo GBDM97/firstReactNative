@@ -23,12 +23,11 @@ export default function InsertName() {
 
   if (currentPage === 1) return (
     <View style={styles.container}>
-      <Text style={{color: 'lime'}}>{userExists}</Text>
+      <Text style={{color: 'lime', position: "absolute", top: 10}}>{userExists}</Text>
       <TextInput style={styles.txInput} onChange={(n)=>{handleInsertUser(n.nativeEvent.text)}}/>
-      <Pressable style={styles.login} onPress={()=>{userExists === "existing user" ? changePage(2):''}}>
+      <Pressable style={styles.login} onPress={()=>{userExists === "existing user" ? changePage(2) :''}}>
         <Text>Login</Text>
       </Pressable>
-      <Text style={{color: 'white'}}>{currentPage.toString()}</Text>
       <StatusBar/>
     </View>
   ) 
