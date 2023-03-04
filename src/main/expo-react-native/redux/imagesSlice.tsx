@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Store } from "./store";
 
 export type images = {
     images: []
@@ -19,12 +20,12 @@ export const imagesSlice = createSlice({
 	initialState,
 	reducers: {
 		changeImagesInfo: (state, action) => {
-			state.images = action.payload.nativeEvent.text;
+			state.images = action.payload;
 		}
 	}
 });
 
-export const selectImages = (state:images) => {return state.images};
+export const selectImages = (state:Store) => {return state};
 
 export const { changeImagesInfo } = imagesSlice.actions;
 
