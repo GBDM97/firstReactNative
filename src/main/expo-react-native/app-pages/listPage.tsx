@@ -72,8 +72,9 @@ export default function ListPage() {
   if (currentPage === 2) return (
     <View style={styles.container}>
       <ContinentList/>
-      <Pressable onPress={()=>console.log(usersState.selectedUser.availableImages)}>
-        <Text>Test</Text>
+      <Pressable style={{ paddingBottom: 40, paddingTop: 20, backgroundColor: 'white', width: 400}}onPress={()=>{
+        changePage(1)}}>
+        <Text style={{color: 'black', textAlign: 'center'}}>Return</Text>
       </Pressable>
     </View>
   )

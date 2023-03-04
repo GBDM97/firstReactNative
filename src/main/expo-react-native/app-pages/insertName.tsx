@@ -21,12 +21,17 @@ export default function InsertName() {
     if (n === usersState.users[2].name){dispatch(changeSelectedUser(usersState.users[2])); setExists('existing user'); return}else{setExists("")}
   }
 
+  const handleLoginPress = () => {
+    setExists("");
+    changePage(2);
+  }
+
   if (currentPage === 1) return (
     <View style={styles.container}>
-      <Text style={{color: 'lime', position: "absolute", top: 10}}>{userExists}</Text>
+      <Text style={{color: 'lime', position: "absolute", top: 100}}>{userExists}</Text>
       <TextInput style={styles.txInput} onChange={(n)=>{handleInsertUser(n.nativeEvent.text)}}/>
-      <Pressable style={styles.login} onPress={()=>{userExists === "existing user" ? changePage(2) :''}}>
-        <Text>Login</Text>
+      <Pressable style={styles.login} onPress={()=>{userExists === "existing user" ? handleLoginPress() :''}}>
+        <Text style={{fontWeight: '500'}}>Login</Text>
       </Pressable>
       <StatusBar/>
     </View>
@@ -53,10 +58,10 @@ const styles = StyleSheet.create({
     margin: 10
   },
   login: {
-    backgroundColor: 'blue',
+    backgroundColor: '#0087FF',
     color: 'black',
     padding: 10,
-    fontFamily: 'Trebuchet MS'
+    fontFamily: 'Trebuchet MS',
   }
 
 });
