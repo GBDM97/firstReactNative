@@ -2,7 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 import { Store } from "./store";
 
 export type images = {
-    images: []
+    images: {
+		id:[],
+		desc:[]
+	}
 };
 
 export type IimagesSlice ={
@@ -12,21 +15,27 @@ export type IimagesSlice ={
 }
 
 export const initialState:images = {
-	images: []
+	images: {
+		id:[],
+		desc:[]
+	}
 };
 
 export const imagesSlice = createSlice({
 	name: 'images',
 	initialState,
 	reducers: {
-		changeImagesInfo: (state, action) => {
-			state.images = action.payload;
+		changeImagesId: (state, action) => {
+			state.images.id = action.payload;
+		},
+		changeImagesDesc: (state, action) => {
+			state.images.desc = action.payload;
 		}
 	}
 });
 
 export const selectImages = (state:Store) => {return state};
 
-export const { changeImagesInfo } = imagesSlice.actions;
+export const { changeImagesId, changeImagesDesc } = imagesSlice.actions;
 
 export default imagesSlice.reducer;
