@@ -30,10 +30,10 @@ border: 2px solid transparent;
 // `;
 
 const Textt = styled(Text)`
-  color: 'red';
+  color: black;
 
-  &:hover {
-    color: 'blue';
+  &:click {
+    color: white;
   }
 `
 

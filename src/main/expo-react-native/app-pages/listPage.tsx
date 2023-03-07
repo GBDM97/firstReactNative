@@ -76,6 +76,10 @@ function ListPage() {
   if (currentPage === 2) return (
     <View style={styles.container}>
       <ContinentList/>
+      <Pressable style={{ padding: 20, backgroundColor: '#0087FF', width: 400}}onPress={()=>{
+        changePage(3)}}>
+        <Text style={{color: 'black', textAlign: 'center'}}>Continue</Text>
+      </Pressable>
       <Pressable style={{ paddingBottom: 40, paddingTop: 20, backgroundColor: 'white', width: 400}}onPress={()=>{
         changePage(1)}}>
         <Text style={{color: 'black', textAlign: 'center'}}>Return</Text>

@@ -6,6 +6,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { MainContextProvider } from './context/mainProvider';
 import InsertName from './app-pages/insertName';
 import ListPage from './app-pages/listPage';
+import Select from './app-pages/select';
 
 export default function App() {
   
@@ -23,6 +24,7 @@ export default function App() {
           <View style={styles.container}>
             <InsertName/>
             <ListPage/>
+            <Select/>
           </View>
         </ApolloProvider>
       </MainContextProvider>

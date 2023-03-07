@@ -1,11 +1,12 @@
-import React, { useMemo } from "react";
+import React, { useLayoutEffect, useMemo } from "react";
 import { StatusBar } from 'expo-status-bar';
 import { Button, NativeSyntheticEvent, Pressable, StyleSheet, Text, TextInput, TextInputChangeEventData, View } from 'react-native';
 import { MainContext } from '../context/mainContext';
 import { useSelector, useDispatch } from "react-redux";
 import { changeSelectedUser, selectUsers } from "../redux/usersSlice";
-import Test from "../components/testComponent";
-import StyledButton from "../components/styledComponent";
+import Test from "../components/memoRefTestComponent";
+import StyledButton from "../components/loginButton";
+import TestButton from "../components/activeInactiveButton";
 
 
 
@@ -31,6 +32,10 @@ export default function InsertName() {
     changePage(2);
   }
 
+  useLayoutEffect(() => {
+    console.log("USE LAYOUT EFFECT FUNCTION TRIGGERED");
+  });
+
 
   if (currentPage === 1) return (
     <>
@@ -39,6 +44,7 @@ export default function InsertName() {
       <Text style={{color: 'lime', position: "absolute", top: 100}}>{userExists}</Text>
       <TextInput style={styles.txInput} onChange={(n)=>{handleInsertUser(n.nativeEvent.text)}}/>
       <StyledButton onPress={()=>{userExists === "existing user" ? handleLoginPress() :''}}></StyledButton>
+      <TestButton ></TestButton>
       <StatusBar/>
     </View>
     </>
