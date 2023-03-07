@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { StatusBar } from 'expo-status-bar';
 import { Button, NativeSyntheticEvent, Pressable, StyleSheet, Text, TextInput, TextInputChangeEventData, View } from 'react-native';
 import { MainContext } from '../context/mainContext';
 import { useSelector, useDispatch } from "react-redux";
 import { changeSelectedUser, selectUsers } from "../redux/usersSlice";
+import Test from "../components/testComponent";
+import StyledButton from "../components/styledComponent";
 
 
 
@@ -14,6 +16,8 @@ export default function InsertName() {
   const usersState = useSelector(selectUsers).usersReducer;
   const dispatch = useDispatch();
 
+  console.log('insertName Component is rendering'); 
+
   const handleInsertUser = (n: string) => {
     
     if (n === usersState.users[0].name){dispatch(changeSelectedUser(usersState.users[0])); setExists('existing user'); return}else{setExists("")}
@@ -22,19 +26,22 @@ export default function InsertName() {
   }
 
   const handleLoginPress = () => {
+    console.log("Login")
     setExists("");
     changePage(2);
   }
 
+
   if (currentPage === 1) return (
+    <>
     <View style={styles.container}>
+      <Test tx={userExists}/>
       <Text style={{color: 'lime', position: "absolute", top: 100}}>{userExists}</Text>
       <TextInput style={styles.txInput} onChange={(n)=>{handleInsertUser(n.nativeEvent.text)}}/>
-      <Pressable style={styles.login} onPress={()=>{userExists === "existing user" ? handleLoginPress() :''}}>
-        <Text style={{fontWeight: '500'}}>Login</Text>
-      </Pressable>
+      <StyledButton onPress={()=>{userExists === "existing user" ? handleLoginPress() :''}}></StyledButton>
       <StatusBar/>
     </View>
+    </>
   ) 
   else return null;
 }
@@ -55,13 +62,7 @@ const styles = StyleSheet.create({
     padding: 10,
     color: 'white',
     textAlign: "center",
-    margin: 10
-  },
-  login: {
-    backgroundColor: '#0087FF',
-    color: 'black',
-    padding: 10,
-    fontFamily: 'Trebuchet MS',
+    margin: 10,
   }
 
 });

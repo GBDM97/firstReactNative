@@ -7,8 +7,6 @@ import { selectUsers } from '../redux/usersSlice';
 export default function ContinentList () {
   const imagesState = useSelector(selectImages).imagesReducer;
   const usersState = useSelector(selectUsers).usersReducer;
-  console.log(...imagesState.images.desc)
-  console.log(imagesState.images.id)
 
   const getImageUri = (item:string) => {
     let r

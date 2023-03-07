@@ -1,5 +1,4 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
@@ -9,12 +8,14 @@ import InsertName from './app-pages/insertName';
 import ListPage from './app-pages/listPage';
 
 export default function App() {
-
+  
   const client = new ApolloClient({
     uri: 'https://countries.trevorblades.com/graphql',
+    // uri: 'https://localhost:8080/graphql',
+
     cache: new InMemoryCache()
   });
-
+  
   return (
     <Provider store={store}>
       <MainContextProvider>

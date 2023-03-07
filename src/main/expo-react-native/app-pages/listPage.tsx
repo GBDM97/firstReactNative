@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, FlatList, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import { CONTINENT_QUERY } from "../gql/Query"
+import { CONTINENT_QUERY, BOOK_QUERY } from "../gql/Query"
 import { useQuery } from '@apollo/client';
 import { MainContext } from '../context/mainContext';
 import { selectUsers, changeSelectedUser } from '../redux/usersSlice';
@@ -9,11 +9,15 @@ import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ContinentList from '../components/continentList';
 
-export default function ListPage() {
+function ListPage() {
   const data = useQuery(CONTINENT_QUERY);
+  // const book = useQuery(BOOK_QUERY);
+  // console.log(book);
   const { currentPage, changePage } = React.useContext(MainContext);
   const usersState = useSelector(selectUsers).usersReducer;
   const dispatch = useDispatch();
+
+  console.log('ListPage Component is rendering'); 
  
   useEffect(()=>{
     if(usersState.selectedUser){
@@ -89,3 +93,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   }
 });
+
+export default React.memo(ListPage)
