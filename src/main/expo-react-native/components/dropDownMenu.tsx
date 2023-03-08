@@ -8,19 +8,17 @@ import {
   Modal,
   View,
 } from 'react-native';
-// import { Icon } from 'react-native-elements';
+import { MainContext } from '../context/mainContext';
 
 interface Props {
-  label: string;
   data: Array<string>;
-  onSelect: (item: { label: string; value: string }) => void;
 }
 
-const Dropdown: FC<Props> = ({ label, data, onSelect }) => {
-  const DropdownButton = useRef();
+const Dropdown: FC<Props> = ({ data }) => {
   const [visible, setVisible] = useState(false);
-  const [selected, setSelected] = useState(undefined);
   const [dropdownTop, setDropdownTop] = useState(50);
+  const { currentImage, changeImage } = React.useContext(MainContext);
+
 
   const openDropdown = () => {
     setDropdownTop((Dimensions.get('window').height /2)+30);
@@ -34,30 +32,27 @@ const Dropdown: FC<Props> = ({ label, data, onSelect }) => {
 
 
   const onItemPress = (item:any): void => {
-    console.log();
-    console.log(item);
-    setSelected(item);
-    onSelect(item);
+    changeImage(item);
     setVisible(false);
   };
 
   const renderItem = ({ item }:any) => (
     <TouchableOpacity style={styles.item} onPress={() => onItemPress(item)}>
-      <Text>{item}</Text>
+      <Text style={styles.overlay}>{item}</Text>
     </TouchableOpacity>
   );
 
-  const renderDropdown = (): ReactElement<any, any> => {
+  const renderDropdown = () => {
     return (
       <Modal visible={visible} transparent animationType="none">
         <TouchableOpacity
           style={styles.overlay}
+          onPress={() => setVisible(false)}
         >
           <View style={[styles.dropdown, { top: dropdownTop }]}>
             <FlatList
               data={data}
               renderItem={renderItem}
-              keyExtractor={(item, index) => index.toString()}
             />
           </View>
         </TouchableOpacity>
@@ -67,15 +62,10 @@ const Dropdown: FC<Props> = ({ label, data, onSelect }) => {
 
   return (
     <TouchableOpacity
-    //   ref={DropdownButton}
       style={styles.button}
-      onPress={toggleDropdown}
-    >
+      onPress={toggleDropdown}>
+    <Text style={{paddingHorizontal: 20}}>{currentImage}</Text>
       {renderDropdown()}
-      <Text style={styles.buttonText}>
-        {/* {(selected && selected.label) || label} */}
-      </Text>
-      {/* <Icon style={styles.icon} type="font-awesome" name="chevron-down" /> */}
     </TouchableOpacity>
   );
 };
@@ -112,6 +102,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 10,
     borderBottomWidth: 1,
+    height: 40
   },
 });
 
